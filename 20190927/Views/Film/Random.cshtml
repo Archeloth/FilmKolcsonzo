@@ -1,0 +1,31 @@
+﻿@*@using _20190927.Models;*@
+@*@model _20190927.Models.Film*@
+@model _20190927.ViewModels.RandomFilmViewModel
+
+@{
+    ViewBag.Title = "Random";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<h2>@Model.Cim</h2>*@
+@*<h2>@((ViewData["Film"] as Film).Cim)</h2>*@
+@*<h2>@ViewBag.Film.Cim</h2>*@
+
+@{ 
+    var cssClassNev = Model.Kolcsonzok.Count > 5 ? "nepszeru" : null;
+}
+<h2 class="@cssClassNev">@Model.Film.Cim</h2>
+
+@if (Model.Kolcsonzok.Count == 0)
+{
+    <p>Ezt a filmet még senki nem kölcsönözte ki.</p>
+}
+else
+{
+    <ul>
+        @foreach (var kolcsonzo in Model.Kolcsonzok)
+        {
+            <li>@kolcsonzo.Nev</li>
+        }
+    </ul>
+}
