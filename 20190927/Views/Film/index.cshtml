@@ -1,0 +1,43 @@
+﻿@model IEnumerable<_20190927.Models.Film>
+
+@{
+    ViewBag.Title = "Filmek";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Filmek</h2>
+
+@{
+    if (!Model.Any())
+    {
+        <p>Még nincsenek filmek.</p>
+    }
+    else
+    {
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Id</th>
+                    <th>Cím</th>
+                    <th>Kiadási év</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (var f in Model)
+                    {
+                        <tr>
+                            <td>
+                                @f.Id
+                            </td>
+                            <td>
+                                @f.Cim
+                            </td>
+                            <td>@f.Kiadas</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    }
+}

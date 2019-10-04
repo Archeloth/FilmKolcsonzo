@@ -10,8 +10,14 @@ namespace _20190927.Controllers
 {
     public class FilmController : Controller
     {
+        public ActionResult Index()
+        {
+            var vrf = GetData();
+            return View(vrf);
+        }
+
         // GET: Filmek/Random
-        public ActionResult Random()
+        public ViewResult Random()
         {
             var film = new Film()
             { Cim = "Star Wars" };
@@ -60,18 +66,34 @@ namespace _20190927.Controllers
         //GET /Filmek/oldal/rendezes
         //GET /Filmek/2/cim
         //GET /Filmek -> 1 oldal és cím szerint
-        public ActionResult Index(int oldal = 1, string rendezes = "cim")
-        {
-            /*if (!oldal.HasValue) oldal = 1;
-            if (string.IsNullOrWhiteSpace()) rendezes = "cim";*/
-            return Content($"Oldal = {oldal}/rendezés = {rendezes}");
-        }
-
+        
+        //public ActionResult Index(int oldal = 1, string rendezes = "cim")
+        //{
+        //    /*if (!oldal.HasValue) oldal = 1;
+        //    if (string.IsNullOrWhiteSpace()) rendezes = "cim";*/
+        //    return Content($"Oldal = {oldal}/rendezés = {rendezes}");
+        //}
+        
         //GET https://localhost:44316/Filmek/megjelenes/2002/12
         [Route("Filmek/Megjelenes/{ev:regex(\\d{4})}/{honap:regex(\\d{2}):range(1,12)}")]//Új mvc route-olás
         public ActionResult Megjelenes(int ev = 2000, int honap = 10)
         {
             return Content($"Év: {ev} Hónap: {honap}");
+        }
+
+        private IEnumerable<Film> GetData()
+        {
+            return new List<Film>
+            {
+                new Film() { Id = 1, Cim = "A remény rabjai", Kiadas = 1994 },
+                new Film() { Id = 2, Cim = "A keresztapa", Kiadas = 1972 },
+                new Film() { Id = 3, Cim = "A keresztapa II", Kiadas = 1974 },
+                new Film() { Id = 4, Cim = "A sötét lovag", Kiadas = 2008 },
+                new Film() { Id = 5, Cim = "Tizenkét dühös ember", Kiadas = 1957 },
+                new Film() { Id = 6, Cim = "Schindler listája", Kiadas = 1993 },
+                new Film() { Id = 7, Cim = "A Gyűrűk Ura: A király visszatér", Kiadas = 2003 },
+                new Film() { Id = 8, Cim = "Ponyvaregény", Kiadas = 1994  }
+            };
         }
     }
 }

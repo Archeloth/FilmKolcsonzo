@@ -1,0 +1,44 @@
+﻿@model IEnumerable<_20190927.Models.Kolcsonzo>
+
+@{
+    ViewBag.Title = "Ügyfelek";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ügyfelek</h2>
+
+@{
+    if (!Model.Any())
+    {
+        <p>Még nincsenek ügyfelek.</p>
+    }
+    else
+    {
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Id</th>
+                    <th>Név</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (var u in Model)
+                    {
+                        <tr>
+                            <td>
+                                @u.Id
+                            </td>
+                            <td>
+                                @Html.ActionLink(u.Nev, "Reszletek", "Ugyfelek", new { id = u.Id},null)
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    }
+}
+
+
+
